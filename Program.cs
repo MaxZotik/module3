@@ -34,10 +34,10 @@ namespace Homework_Theme_03
             //
             // В качестве тестового задания предлагается решить следующую задачу.
             //
-            // Написать игру, в которою могут играть два игрока.
-            // При старте, игрокам предлагается ввести свои никнеймы.
-            // Никнеймы хранятся до конца игры.
-            // Программа загадывает случайное число gameNumber от 12 до 120 сообщая это число игрокам.
+            // *Написать игру, в которою могут играть два игрока.
+            // *При старте, игрокам предлагается ввести свои никнеймы.
+            // *Никнеймы хранятся до конца игры.
+            // *Программа загадывает случайное число gameNumber от 12 до 120 сообщая это число игрокам.
             // Игроки ходят по очереди(игра сообщает о ходе текущего игрока)
             // Игрок, ход которого указан вводит число userTry, которое может принимать значения 1, 2, 3 или 4,
             // введенное число вычитается из gameNumber
@@ -69,6 +69,101 @@ namespace Homework_Theme_03
             // Ход User2: 3
             //
             // User2 победил!
+
+
+            #region Реализация задания
+
+            //Указание колличества игроков
+            //Если указан один игрок то игра с компьютером
+            int countPlayers;
+            string[] players;
+            Console.WriteLine("Enter count players: ");
+            countPlayers = Convert.ToInt32(Console.ReadLine());
+            bool playerII = (countPlayers == 1);
+
+
+            //Создание массива игроков
+            if (playerII)
+            {
+                players = new string[countPlayers + 1];
+                players[1] = "Computer";
+            }
+            else
+            {
+                players = new string[countPlayers];
+            }
+            
+
+            //Инициализация игроков
+            for (int i = 0; i < countPlayers; i++)
+            {
+                Console.WriteLine($"Enter name player { i + 1 }: ");
+                players[i] = Console.ReadLine();
+            }
+
+            //Задать диапазон чисел
+            int[] gameNumbers = new int[2];
+            Console.WriteLine("Enter min number: ");
+            gameNumbers[0] = Convert.ToInt32(Console.ReadLine()) + 1;
+
+            Console.WriteLine("Enter max number: ");
+            gameNumbers[1] = Convert.ToInt32(Console.ReadLine());
+
+
+            Random rand = new Random();
+            int gameNumber = rand.Next(gameNumbers[0], gameNumbers[1]);
+
+            int number;
+
+            //Логика игры
+            do
+            {
+                Console.Clear();
+                for (int i = 0; i < players.Length; i++)
+                {
+                    
+                    Console.WriteLine($"Число: { gameNumber }");
+
+                    //Прверка "игра с компьютером" или "многопользовательская игра"
+                    if (playerII && i == 1)
+                    {
+                        number = rand.Next(1, 5);
+                        Console.WriteLine($"Player { players[i] } entered number: { number }");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Player { players[i] } enter number: ");
+                        number = Convert.ToInt32(Console.ReadLine());
+                    }
+
+                    //Проверка вводимого диапазона числа
+                    if(number < 1 || number > 4)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("The number must be from 1 to 4!");
+                        i--;
+                        Console.ReadKey();
+                        break;
+                    }
+
+                    gameNumber -= number;
+
+                    //Определение победителя
+                    if (gameNumber <= 0)
+                    {
+                        Console.WriteLine($"Player { players[i] } win!!!");
+                        break;
+                    }
+
+                    Console.ReadKey();
+                    Console.Clear();
+                }   
+            }
+            while (gameNumber > 0);
+
+            Console.ReadKey();
+
+            #endregion
         }
     }
 }

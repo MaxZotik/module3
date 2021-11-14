@@ -70,8 +70,98 @@ namespace Homework_Theme_03
             //
             // User2 победил!
 
+            /*
+            #region Задание 1. Приложение по определению чётного или нечётного числа
 
-            #region Реализация задания
+            Console.WriteLine("The program for determining an even or uneven number.");
+            Console.WriteLine("Enter number: ");
+            int numberEven = Convert.ToInt32(Console.ReadLine());
+
+            if (numberEven % 2 == 0)
+            {
+                Console.WriteLine($"Number { numberEven } - even number!");
+            }
+            else
+            {
+                Console.WriteLine($"Number { numberEven } - uneven number!");
+            }
+
+            #endregion
+            */
+
+            /*
+            #region Задание 2. Программа подсчёта суммы карт в игре «21»
+            
+            Console.WriteLine("The program \"Blackjack\"");
+            int sum = 0;
+
+            Console.WriteLine("Enter the number of cards: ");
+            int countCard = Convert.ToInt32(Console.ReadLine());
+
+            for (int i = 1; i <= countCard; i++)
+            {
+                Console.WriteLine("Enter card: ");
+                string numberCard = Console.ReadLine();
+                switch (numberCard)
+                {
+                    case "J":
+                        sum += 10;
+                        break;
+                    case "Q":
+                        sum += 10;
+                        break;
+                    case "K":
+                        sum += 10;
+                        break;
+                    case "T":
+                        sum += 11;
+                        break;
+                    default:
+                        int count = Convert.ToInt32(numberCard);
+                        sum += count;
+                        break;
+                }
+            }
+
+            Console.WriteLine($"Sum cards = { sum }");
+            Console.ReadKey();
+            #endregion
+            */
+
+
+            #region Задание 3. Проверка простого числа
+
+            Console.WriteLine("Enter number: ");
+            int numberPrime = Convert.ToInt32(Console.ReadLine());
+            bool result = true;
+            int count = 2;
+
+            while (count < numberPrime)
+            {
+                if(numberPrime % count == 0)
+                {
+                    result = false;
+                    break;
+                }
+
+                count++;
+            }
+
+            if (result)
+            {
+                Console.WriteLine($"{ numberPrime } - is prime number!");
+            }
+            else
+            {
+                Console.WriteLine($"{ numberPrime } - is not a prime number!");
+            }
+
+            Console.ReadKey();
+            #endregion
+
+
+            
+            #region Реализация тестового задания
 
             //Указание колличества игроков
             //Если указан один игрок то игра с компьютером
@@ -164,6 +254,7 @@ namespace Homework_Theme_03
             Console.ReadKey();
 
             #endregion
+            
         }
     }
 }
